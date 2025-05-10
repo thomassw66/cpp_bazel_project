@@ -1,0 +1,20 @@
+#  -DLLVM_DEFAULT_TARGET_TRIPLE='aarch64-apple-darwin20.1.0' \
+# Xcode, Ninja
+BUILD_SYSTEM=Ninja
+BUILD_TAG=ninja
+INSTALLDIR=$HOME/llvm
+
+export MACOSX_DEPLOYMENT_TARGET=14.0
+cmake /Users/allstar/src/llvm/llvm-project/llvm \
+      -G$BUILD_SYSTEM -B ${BUILD_TAG}_build \
+      -DCMAKE_OSX_ARCHITECTURES='arm64' \
+      -DCMAKE_C_COMPILER=`which clang` \
+      -DCMAKE_CXX_COMPILER=`which clang++` \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=$INSTALLDIR \
+      -DLLVM_LOCAL_RPATH=$INSTALLDIR/lib \
+      -DLLVM_ENABLE_WERROR=FALSE \
+      -DLLVM_TARGETS_TO_BUILD='AArch64' \
+      -DDEFAULT_SYSROOT="$(xcrun --show-sdk-path)" \
+      -DLLVM_ENABLE_PROJECTS='clang;lldb;clang-tools-extra' \
+			-DLLVM_ENABLE_RUNTIMES='libunwind;libcxx;libcxxabi'
