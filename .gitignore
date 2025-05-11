@@ -1,0 +1,4 @@
+bazel-bin/
+bazel-cpp_pybind/
+bazel-out/
+bazel-testlogs/
