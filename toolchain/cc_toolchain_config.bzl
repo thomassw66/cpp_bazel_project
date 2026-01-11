@@ -25,11 +25,11 @@ def _impl(ctx):
         ),
         tool_path(
             name = "ld",
-            path = "/Users/allstar/bin/lld",
+            path = "/Users/allstar/llvm/bin/lld",
         ),
         tool_path(
             name = "ar",
-            path = "/Users/allstar/bin/llvm-ar",
+            path = "/Users/allstar/llvm/bin/llvm-ar",
         ),
         tool_path(
             name = "cpp",
@@ -60,23 +60,22 @@ def _impl(ctx):
                 flag_set(
                     actions = all_link_actions,
                     flag_groups = ([
-											flag_group(flags = [
-												"-lstdc++",
-												"-L/Users/allstar/llvm/lib",
-												"-Wl,-rpath,/Users/allstar/llvm/lib",
-											])
-										]),
+                        flag_group(flags = [
+                            "-lstdc++",
+                            "-L/Users/allstar/llvm/lib",
+                            "-Wl,-rpath,/Users/allstar/llvm/lib",
+                        ]),
+                    ]),
                 ),
             ],
         ),
-
     ]
     return cc_common.create_cc_toolchain_config_info(
         ctx = ctx,
         cxx_builtin_include_directories = [
             "/Users/allstar/llvm/lib/clang/20/include",
             "/Users/allstar/llvm/include",
-						"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include",
+            "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include",
         ],
         features = features,
         toolchain_identifier = "local",

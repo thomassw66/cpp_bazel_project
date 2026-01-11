@@ -1,4 +1,2 @@
-bazel-bin/
-bazel-cpp_pybind/
-bazel-out/
-bazel-testlogs/
+# Ignore all bazel-* symlinks
+/bazel-*
